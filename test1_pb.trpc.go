@@ -43,7 +43,7 @@ func HttpService_HelloLipei_Handler(svr interface{}, ctx context.Context, f serv
 
 // HttpServer_ServiceDesc descriptor for server.RegisterService.
 var HttpServer_ServiceDesc = server.ServiceDesc{
-	ServiceName: "trpc.lipei.http",
+	ServiceName: "trpc.test1_pb.http",
 	HandlerType: ((*HttpService)(nil)),
 	Methods: []server.Method{
 		{
@@ -51,7 +51,7 @@ var HttpServer_ServiceDesc = server.ServiceDesc{
 			Func: HttpService_HelloLipei_Handler,
 		},
 		{
-			Name: "/trpc.lipei.http/HelloLipei",
+			Name: "/trpc.test1_pb.http/HelloLipei",
 			Func: HttpService_HelloLipei_Handler,
 		},
 	},
