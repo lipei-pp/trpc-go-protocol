@@ -1,6 +1,6 @@
 syntax = "proto3";
-package trpc.test1_pb;
-option go_package = "trpc.test1_pb/pb";
+package trpc.lipei;
+option go_package = "trpc.lipei";
 service http {
   // @alias=/lipei/hello
   rpc HelloLipei(HelloLipeiReq) returns (HelloLipeiReq) {}
