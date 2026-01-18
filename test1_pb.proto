@@ -1,5 +1,5 @@
 syntax = "proto3";
-package trpc.Test1Pb;
+package trpc.lipei;
 service http {
   // @alias=/lipei/hello
   rpc HelloLipei(HelloLipeiReq) returns (HelloLipeiReq) {}
