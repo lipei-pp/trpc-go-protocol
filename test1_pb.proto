@@ -1,0 +1,14 @@
+syntax = "proto3";
+package trpc.Test1Pb;
+service http {
+  // @alias=/lipei/hello
+  rpc HelloLipei(HelloLipeiReq) returns (HelloLipeiReq) {}
+}
+
+message HelloLipeiReq {
+  string msg = 1;
+}
+
+message HelloLipeiRsp {
+  string msg = 1;
+}
