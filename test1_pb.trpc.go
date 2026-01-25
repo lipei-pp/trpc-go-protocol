@@ -20,7 +20,7 @@ import (
 // HttpService defines service.
 type HttpService interface {
 	// HelloLipei @alias=/lipei/hello
-	HelloLipei(ctx context.Context, req *HelloLipeiReq) (*HelloLipeiReq, error)
+	HelloLipei(ctx context.Context, req *HelloLipeiReq) (*HelloLipeiRsp, error)
 }
 
 func HttpService_HelloLipei_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -69,7 +69,7 @@ func RegisterHttpService(s server.Service, svr HttpService) {
 type UnimplementedHttp struct{}
 
 // HelloLipei @alias=/lipei/hello
-func (s *UnimplementedHttp) HelloLipei(ctx context.Context, req *HelloLipeiReq) (*HelloLipeiReq, error) {
+func (s *UnimplementedHttp) HelloLipei(ctx context.Context, req *HelloLipeiReq) (*HelloLipeiRsp, error) {
 	return nil, errors.New("rpc HelloLipei of service Http is not implemented")
 }
 
@@ -82,7 +82,7 @@ func (s *UnimplementedHttp) HelloLipei(ctx context.Context, req *HelloLipeiReq) 
 // HttpClientProxy defines service client proxy
 type HttpClientProxy interface {
 	// HelloLipei @alias=/lipei/hello
-	HelloLipei(ctx context.Context, req *HelloLipeiReq, opts ...client.Option) (rsp *HelloLipeiReq, err error)
+	HelloLipei(ctx context.Context, req *HelloLipeiReq, opts ...client.Option) (rsp *HelloLipeiRsp, err error)
 }
 
 type HttpClientProxyImpl struct {
@@ -94,7 +94,7 @@ var NewHttpClientProxy = func(opts ...client.Option) HttpClientProxy {
 	return &HttpClientProxyImpl{client: client.DefaultClient, opts: opts}
 }
 
-func (c *HttpClientProxyImpl) HelloLipei(ctx context.Context, req *HelloLipeiReq, opts ...client.Option) (*HelloLipeiReq, error) {
+func (c *HttpClientProxyImpl) HelloLipei(ctx context.Context, req *HelloLipeiReq, opts ...client.Option) (*HelloLipeiRsp, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
 	msg.WithClientRPCName("/lipei/hello")
@@ -107,7 +107,7 @@ func (c *HttpClientProxyImpl) HelloLipei(ctx context.Context, req *HelloLipeiReq
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
-	rsp := &HelloLipeiReq{}
+	rsp := &HelloLipeiRsp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

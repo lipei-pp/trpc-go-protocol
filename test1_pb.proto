@@ -3,7 +3,7 @@ package lipei.proto;
 option go_package = "github.com/lipei-pp/trpc-go-protocol";
 service http {
   // @alias=/lipei/hello
-  rpc HelloLipei(HelloLipeiReq) returns (HelloLipeiReq) {}
+  rpc HelloLipei(HelloLipeiReq) returns (HelloLipeiRsp) {}
 }
 
 message HelloLipeiReq {

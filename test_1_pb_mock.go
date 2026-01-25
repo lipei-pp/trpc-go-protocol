@@ -46,10 +46,10 @@ func (m *MockHttpService) ISGOMOCK() struct{} {
 }
 
 // HelloLipei mocks base method.
-func (m *MockHttpService) HelloLipei(ctx context.Context, req *HelloLipeiReq) (*HelloLipeiReq, error) {
+func (m *MockHttpService) HelloLipei(ctx context.Context, req *HelloLipeiReq) (*HelloLipeiRsp, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "HelloLipei", ctx, req)
-	ret0, _ := ret[0].(*HelloLipeiReq)
+	ret0, _ := ret[0].(*HelloLipeiRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -89,14 +89,14 @@ func (m *MockHttpClientProxy) ISGOMOCK() struct{} {
 }
 
 // HelloLipei mocks base method.
-func (m *MockHttpClientProxy) HelloLipei(ctx context.Context, req *HelloLipeiReq, opts ...client.Option) (*HelloLipeiReq, error) {
+func (m *MockHttpClientProxy) HelloLipei(ctx context.Context, req *HelloLipeiReq, opts ...client.Option) (*HelloLipeiRsp, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "HelloLipei", varargs...)
-	ret0, _ := ret[0].(*HelloLipeiReq)
+	ret0, _ := ret[0].(*HelloLipeiRsp)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
