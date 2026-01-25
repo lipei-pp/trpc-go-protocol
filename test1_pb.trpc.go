@@ -19,7 +19,6 @@ import (
 
 // HttpService defines service.
 type HttpService interface {
-	// HelloLipei @alias=/lipei/hello
 	HelloLipei(ctx context.Context, req *HelloLipeiReq) (*HelloLipeiRsp, error)
 }
 
@@ -47,10 +46,6 @@ var HttpServer_ServiceDesc = server.ServiceDesc{
 	HandlerType: ((*HttpService)(nil)),
 	Methods: []server.Method{
 		{
-			Name: "/lipei/hello",
-			Func: HttpService_HelloLipei_Handler,
-		},
-		{
 			Name: "/lipei.proto.http/HelloLipei",
 			Func: HttpService_HelloLipei_Handler,
 		},
@@ -68,7 +63,6 @@ func RegisterHttpService(s server.Service, svr HttpService) {
 
 type UnimplementedHttp struct{}
 
-// HelloLipei @alias=/lipei/hello
 func (s *UnimplementedHttp) HelloLipei(ctx context.Context, req *HelloLipeiReq) (*HelloLipeiRsp, error) {
 	return nil, errors.New("rpc HelloLipei of service Http is not implemented")
 }
@@ -81,7 +75,6 @@ func (s *UnimplementedHttp) HelloLipei(ctx context.Context, req *HelloLipeiReq) 
 
 // HttpClientProxy defines service client proxy
 type HttpClientProxy interface {
-	// HelloLipei @alias=/lipei/hello
 	HelloLipei(ctx context.Context, req *HelloLipeiReq, opts ...client.Option) (rsp *HelloLipeiRsp, err error)
 }
 
@@ -97,7 +90,7 @@ var NewHttpClientProxy = func(opts ...client.Option) HttpClientProxy {
 func (c *HttpClientProxyImpl) HelloLipei(ctx context.Context, req *HelloLipeiReq, opts ...client.Option) (*HelloLipeiRsp, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
-	msg.WithClientRPCName("/lipei/hello")
+	msg.WithClientRPCName("/lipei.proto.http/HelloLipei")
 	msg.WithCalleeServiceName(HttpServer_ServiceDesc.ServiceName)
 	msg.WithCalleeApp("")
 	msg.WithCalleeServer("")
